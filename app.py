@@ -1,19 +1,15 @@
 # app.py
-from lib.upload import process_devices_json_file_upload
-from queries import DEVICE_BY_ID_QUERY, DEVICES_QUERY
+from lib.upload_process_devices import process_devices_json_file_upload
+from queries import DEVICE_BY_ID_QUERY
 import logging
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 
 from lib.graphql import graphql
-from lib.process_devices_query import process_devices_query
-
-# MINIMUN_REMAINING_TIME_MS = int(
-#     os.getenv('MINIMUM_REMAINING_TIME_MS')) or 10000
+from lib.general_devices_query import general_devices_query
 
 
 log = logging.getLogger(__name__)
-
 app = Flask(__name__)
 
 
@@ -33,21 +29,20 @@ def get_device_by_id(device_id):
 
 @app.route("/devices")
 def get_devices():
-    return process_devices_query()
+    return general_devices_query()
 
 
 @app.route("/devices/type/<string:device_type>")
 def get_devices_by_type(device_type):
-    return process_devices_query(param=device_type, query_type="by_type")
+    return general_devices_query(param=device_type, query_type="by_type")
 
 
 @app.route("/devices/status/<string:device_status>")
 def get_devices_by_status(device_status):
-    return process_devices_query(param=device_status, query_type="by_status")
+    return general_devices_query(param=device_status, query_type="by_status")
 
 
 @app.route("/upload_devices", methods=["POST"])
 def upload_devices():
     process_devices_json_file_upload()
-
     return "ok"

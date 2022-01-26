@@ -5,7 +5,7 @@ from lib.graphql import graphql
 from queries import DEVICES_QUERY
 
 
-def process_devices_query(param=None, query_type='all'):
+def general_devices_query(param=None, query_type='all'):
     offset = request.args.get('offset')
     limit = request.args.get('limit')
     variables = {
