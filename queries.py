@@ -21,3 +21,15 @@ query DEVICES_QUERY($where: devices_bool_exp, $offset: Int) {
   }
 }
 """
+
+DEVICES_UPSERT_MUTATION = """
+mutation DEVICES_UPSERT_MUTATION ($objects: [devices_insert_input!]!, $on_conflict: devices_on_conflict) {
+  insert_devices(objects:$objects, on_conflict:$on_conflict) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+"""
+
