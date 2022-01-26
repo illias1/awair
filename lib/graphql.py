@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 HASURA_ADMIN_SECRET = os.environ.get('HASURA_ADMIN_SECRET')
+GRAPHQL_URL = os.environ.get('GRAPHQL_URL')
+
 headers = {'x-hasura-admin-secret': HASURA_ADMIN_SECRET}
-graphql_url = 'https://square-ox-76.hasura.app/v1/graphql'
+graphql_url = GRAPHQL_URL
 
 
 def graphql(query, variables):
