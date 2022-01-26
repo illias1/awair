@@ -11,8 +11,8 @@ devices_by_pk(id: $id) {
 """
 
 DEVICES_QUERY = """
-query DEVICES_QUERY($where: devices_bool_exp, $offset: Int) {
-  devices(where: $where, offset: $offset) {
+query DEVICES_QUERY($where: devices_bool_exp, $offset: Int, $limit: Int) {
+  devices(where: $where, offset: $offset, limit: $limit) {
     id
     status
     timezone
